@@ -39,7 +39,7 @@ const Contact = () => {
               }}
               className="absolute inset-0 flex justify-center items-center md:hidden"
             >
-              <div className="lg:bg-black/60 backdrop-blur-xl p-5 rounded-lg w-[90%] lg:shadow-lg lg:shadow-purple-800/40 border border-white/10">
+              <div className="lg:bg-black/60 backdrop-blur-xl p-5 rounded-lg w-[90%] lg:shadow-lg border border-white/10">
                 <ContactForm />
               </div>
             </motion.div>
@@ -47,7 +47,7 @@ const Contact = () => {
 
           {/* Contact form & socials for desktop */}
           <div className="hidden md:flex flex-col gap-10">
-            <div className="bg-black/60 backdrop-blur-xl rounded-2xl p-8 shadow-lg shadow-purple-800/40 border border-white/10">
+            <div className="bg-black/60 backdrop-blur-xl rounded-2xl p-8 shadow shadow-support  ">
               <ContactForm />
             </div>
 

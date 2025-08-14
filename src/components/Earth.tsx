@@ -33,7 +33,7 @@ const Earth3D: React.FC<EarthProps> = ({ className = "" }) => {
   const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
   const earthGroupRef = useRef<THREE.Group | null>(null);
   const controlsRef = useRef<any | null>(null);
-  const [autoRotate, setAutoRotate] = useState(true);
+  const [autoRotate] = useState(true);
   const meshesRef = useRef<{
     earthMesh: THREE.Mesh | null;
     lightsMesh: THREE.Mesh | null;
