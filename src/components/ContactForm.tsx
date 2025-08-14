@@ -30,7 +30,7 @@ const ContactForm = () => {
     resolver: zodResolver(contactFormSchema),
   });
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async () => {
     setLoading(true);
     try {
       // const payload = {
