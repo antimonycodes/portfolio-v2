@@ -1,11 +1,10 @@
-import GradientSpheres from "../components/GradientDpheres";
 import TitleHeader from "../components/TitleHeader";
 import Works from "./Works";
 
 const Projects = () => {
   return (
     <section
-      className="w-full bg-[#0B0D01] h-full flex-center relative"
+      className="w-full bg-black h-full flex-center relative"
       id="projects"
     >
       {/* <GradientSpheres

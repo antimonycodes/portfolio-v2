@@ -3,7 +3,7 @@ import { motion, useInView } from "framer-motion";
 import ContactForm from "../components/ContactForm";
 import Earth3D from "../components/Earth";
 import TitleHeader from "../components/TitleHeader";
-import { bentoSocialLinks } from "../constants";
+// import { bentoSocialLinks } from "../constants";
 
 const Contact = () => {
   const contactRef = useRef(null);
@@ -13,7 +13,7 @@ const Contact = () => {
     <section
       id="contact"
       ref={contactRef}
-      className="relative bg-[#0B0D01] flex-center md:p-0 px-5"
+      className="relative bg-black flex-center "
     >
       <div className="w-full h-full container md:my-40 my-20">
         <TitleHeader
@@ -25,7 +25,7 @@ const Contact = () => {
         <div className="mt-20 grid md:grid-cols-2 grid-cols-1 gap-10 relative">
           {/* Earth */}
           <div className="relative w-full h-full flex justify-center items-center">
-            <div className="w-full h-full min-h-[400px] flex justify-center items-center">
+            <div className="w-full h-full min-h-[400px] ">
               <Earth3D className="w-full h-full" />
             </div>
 

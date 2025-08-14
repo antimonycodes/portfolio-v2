@@ -1,4 +1,4 @@
-const TitleHeader = ({ title, number, text }) => {
+const TitleHeader = ({ title, number, text }: any) => {
   return (
     <div className="flex justify-between items-center">
       <div>

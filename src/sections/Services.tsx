@@ -1,4 +1,6 @@
-import { useRef } from "react";
+import { useRef, useState, useCallback } from "react";
+import type { RefObject } from "react";
+
 import { useMediaQuery } from "react-responsive";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
@@ -7,148 +9,225 @@ import TitleHeader from "../components/TitleHeader";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export const servicesData = [
+interface Service {
+  title: string;
+  description: string;
+  items: string[];
+}
+
+export const servicesData: Service[] = [
   {
     title: "Full-Stack Web Development",
     description:
-      "I design and build modern, scalable web applications from concept to deployment—combining intuitive front-end interfaces with powerful, secure backends to deliver seamless user experiences.",
+      "Scalable web apps with intuitive interfaces and secure backends.",
     items: [
-      {
-        title: "Backend Engineering",
-        description: "(Node.js, Express, REST APIs, Real-time with Socket.IO)",
-      },
-      {
-        title: "Frontend Excellence",
-        description:
-          "(React, TypeScript, Tailwind CSS, Framer Motion, Responsive UI/UX)",
-      },
-      {
-        title: "Database Design",
-        description:
-          "(MongoDB, PostgreSQL, SQL Optimization, Scalable Structures)",
-      },
+      "Node.js, Express, REST APIs",
+      "React, TypeScript, Tailwind CSS",
+      "MongoDB, PostgreSQL",
     ],
   },
   {
     title: "Custom Business Applications",
     description:
-      "I create tailored software solutions that streamline operations, boost productivity, and adapt to your business needs—whether it’s managing data, automating tasks, or enhancing customer interactions.",
+      "Tailored software to streamline operations and boost productivity.",
     items: [
-      {
-        title: "Dashboard Systems",
-        description: "(Role-based Access, Analytics, Dynamic Content)",
-      },
-      {
-        title: "Automation Tools",
-        description: "(Workflow Automation, API Integrations, Scheduled Jobs)",
-      },
-      {
-        title: "Interactive Platforms",
-        description: "(Quizzes, Leaderboards, Community Features)",
-      },
+      "Analytics, Role-based Dashboards",
+      "Workflows, API Integrations",
+      "Quizzes, Leaderboards",
     ],
   },
   {
     title: "AI & Automation Solutions",
-    description:
-      "I integrate AI into applications to automate processes, generate content, and provide smarter user interactions—cutting down manual work and improving engagement.",
+    description: "AI-driven automation for smarter user engagement.",
     items: [
-      {
-        title: "AI Integration",
-        description: "(Chatbots, Content Generation, LLM APIs)",
-      },
-      {
-        title: "Process Automation",
-        description: "(Scheduled Posting, Appointment Reminders, Data Sync)",
-      },
-      {
-        title: "Intelligent Features",
-        description: "(Search, Recommendations, Sentiment Analysis)",
-      },
+      "Chatbots, LLMs",
+      "Scheduled Tasks, Data Sync",
+      "Search, Recommendations",
     ],
   },
   {
     title: "Web & Mobile Applications",
-    description:
-      "I build pixel-perfect, responsive apps for web and mobile that look great and work flawlessly—ensuring smooth performance across devices.",
+    description: "Responsive, pixel-perfect apps for all platforms.",
     items: [
-      {
-        title: "Cross-Platform Apps",
-        description: "(React Native, Single Codebase for iOS/Android/Web)",
-      },
-      {
-        title: "PWAs",
-        description: "(Offline Mode, Push Notifications, Installable Apps)",
-      },
-      {
-        title: "E-Commerce & Transactions",
-        description: "(Checkout Flows, Payment Gateways, Inventory APIs)",
-      },
+      "React Native for iOS/Android",
+      "PWAs with Offline Mode",
+      "Checkout Flows, Payment Gateways",
     ],
   },
 ];
 
-const Services = () => {
-  const sectionRef = useRef(null);
-  const titleRefs = useRef<HTMLDivElement[]>([]);
-  const contentRefs = useRef<HTMLDivElement[]>([]);
-  const isDesktop = useMediaQuery({ minWidth: "48rem" }); // 768px
+interface ServiceTileProps {
+  service: Service;
+  index: number;
+  tileRefs: RefObject<(HTMLDivElement | null)[]>;
+  isDesktop: boolean;
+  expandedIndex: number | null;
+  setExpandedIndex: (index: number | null) => void;
+}
 
-  useGSAP(() => {
-    if (!isDesktop) return;
+const ServiceTile: React.FC<ServiceTileProps> = ({
+  service,
+  index,
+  tileRefs,
+  // isDesktop,
+  expandedIndex,
+  setExpandedIndex,
+}) => {
+  const isExpanded = expandedIndex === index;
+  const contentRef = useRef<HTMLDivElement>(null);
+  const iconRef = useRef<HTMLSpanElement>(null);
 
-    titleRefs.current.forEach((titleEl, index) => {
-      if (!titleEl || !contentRefs.current[index]) return;
+  const handleToggle = useCallback(() => {
+    setExpandedIndex(isExpanded ? null : index);
+  }, [isExpanded, index, setExpandedIndex]);
 
-      ScrollTrigger.create({
-        trigger: titleEl,
-        start: () => `top ${index === 0 ? "10vh" : "top"}`,
-        end: () =>
-          `+=${
-            contentRefs.current[index].offsetHeight +
-            (index < servicesData.length - 1
-              ? titleRefs.current[index + 1].offsetHeight
-              : 0)
-          }`,
-        pin: true,
-        pinSpacing: false,
-        anticipatePin: 1,
+  useGSAP(
+    () => {
+      if (!contentRef.current || !iconRef.current) return;
+
+      gsap.to(contentRef.current, {
+        height: isExpanded ? "auto" : 0,
+        opacity: isExpanded ? 1 : 0,
+        duration: 0.4,
+        ease: "power3.out",
+        overwrite: "auto",
       });
 
-      gsap.from(titleEl, {
-        y: 200,
-        opacity: 0,
-        scrollTrigger: {
-          trigger: titleEl,
-          start: "top 80%",
-        },
-        duration: 1,
-        ease: "circ.out",
+      gsap.to(iconRef.current, {
+        rotate: isExpanded ? 180 : 0,
+        duration: 0.3,
+        ease: "power3.out",
       });
-    });
 
-    ScrollTrigger.refresh();
-  }, [isDesktop]);
+      const ul = contentRef.current?.querySelector("ul");
+      if (ul && ul.children.length > 0) {
+        gsap.to(ul.children, {
+          opacity: isExpanded ? 1 : 0,
+          y: isExpanded ? 0 : 10,
+          duration: 0.3,
+          stagger: 0.1,
+          ease: "power3.out",
+          delay: isExpanded ? 0.2 : 0,
+        });
+      }
+    },
+    { dependencies: [isExpanded], scope: contentRef }
+  );
+
+  return (
+    <div
+      ref={(el) => {
+        tileRefs.current[index] = el;
+      }}
+      className="px-6 py-4 mb-4 bg-black/40 backdrop-blur-md border border-white/10 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 hover:scale-[1.02] cursor-pointer select-none"
+      onClick={handleToggle}
+      onKeyDown={(e) => e.key === "Enter" && handleToggle()}
+      tabIndex={0}
+      role="button"
+      aria-expanded={isExpanded}
+      aria-controls={`service-content-${index}`}
+    >
+      <h2 className="text-2xl lg:text-3xl font-light text-white flex items-center justify-between font-sans tracking-tight">
+        {service.title}
+        <span ref={iconRef} className="text-lg text-support">
+          {isExpanded ? "−" : "+"}
+        </span>
+      </h2>
+      <p className="text-base lg:text-lg text-white/70 mt-2 font-light">
+        {service.description}
+      </p>
+      <div
+        ref={contentRef}
+        id={`service-content-${index}`}
+        className="overflow-hidden"
+        style={{ height: isExpanded ? "auto" : 0, opacity: isExpanded ? 1 : 0 }}
+      >
+        <ul className="mt-4 text-sm lg:text-base text-white/80 marker:text-support list-disc list-inside">
+          {service.items.map((item, itemIndex) => (
+            <li key={`item-${index}-${itemIndex}`} className="my-1.5">
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+};
+
+const Services: React.FC = () => {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const tileRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+  const isDesktop = useMediaQuery({ minWidth: 768 });
+  const [scrollY, setScrollY] = useState(0);
+
+  useGSAP(
+    () => {
+      if (!isDesktop) return;
+
+      const ctx = gsap.context(() => {
+        tileRefs.current.forEach((tileEl, index) => {
+          if (!tileEl) return;
+
+          gsap.from(tileEl, {
+            y: 30,
+            opacity: 0,
+            scrollTrigger: {
+              trigger: tileEl,
+              start: "top 85%",
+              end: "top 60%",
+              scrub: 0.3,
+              toggleActions: "play none none reverse",
+            },
+            duration: 0.8,
+            ease: "power3.out",
+            delay: index * 0.15,
+          });
+        });
+      }, sectionRef);
+
+      const handleScroll = () => {
+        setScrollY(window.scrollY);
+      };
+
+      const handleResize = () => {
+        ScrollTrigger.refresh();
+      };
+
+      const debounceResize = setTimeout(handleResize, 200);
+      window.addEventListener("scroll", handleScroll);
+      window.addEventListener("resize", handleResize);
+
+      return () => {
+        clearTimeout(debounceResize);
+        window.removeEventListener("scroll", handleScroll);
+        window.removeEventListener("resize", handleResize);
+        ctx.revert();
+      };
+    },
+    { dependencies: [], scope: sectionRef }
+  );
 
   return (
     <section
       ref={sectionRef}
       id="about"
-      className="bg-black rounded-t-4xl relative md:p-0 px-5 "
-      style={{
-        minHeight: isDesktop ? `${servicesData.length * 100}vh` : "auto",
-      }}
+      className="bg-black px-5 py-12 md:px-8 lg:px-8 relative"
+      aria-label="About Me Section"
     >
-      <div className="container px-10 w-full relative z-10">
+      <div
+        className="absolute inset-0 bg-gradient-to-b from-black/50 to-black/20"
+        style={{ transform: `translateY(${scrollY * 0.2}px)` }}
+      />
+      <div className="container mx-auto pt-6 relative z-10">
         <TitleHeader
           title="About Me"
           number="01"
           text="Precision. Performance. Professionalism."
         />
       </div>
-
-      <div className="mb-12 px-10">
-        <p className="text-xl leading-relaxed tracking-widest lg:text-2xl text-white/60">
+      <div className=" mb-8 relative z-10  lg:px-8">
+        <p className="text-base md:text-lg lg:text-lg text-white/70 leading-relaxed font-light">
           I am{" "}
           <span className="text-white font-semibold">Akinrinade Tobiloba</span>,
           a full-stack developer from Nigeria passionate about building
@@ -156,65 +235,29 @@ const Services = () => {
           engineer’s precision with a creator’s vision, ensuring every project
           is optimized for performance, maintainability, and user satisfaction.
         </p>
-        <p className="text-xl leading-relaxed tracking-widest lg:text-2xl text-white/60">
+        <p className="text-base md:text-lg lg:text-lg text-white/70 leading-relaxed mt-3 font-light">
           My expertise spans both front-end and back-end development. I excel at
           crafting clean, responsive, and accessible interfaces while ensuring
           the systems powering them are secure and future-ready.
         </p>
-        <p className="text-xl leading-relaxed tracking-widest lg:text-2xl text-white/60">
+        <p className="text-base md:text-lg lg:text-lg text-white/70 leading-relaxed mt-3 font-light">
           Beyond coding, I focus on problem-solving, clear communication, and
           delivering solutions that align with real-world needs.
         </p>
       </div>
-
-      {servicesData.map((service, index) => (
-        <div
-          key={index}
-          className="px-10 pt-6 pb-12 text-white border-t-2 border-white/30"
-          style={{
-            position: "relative",
-            minHeight: isDesktop ? "100vh" : "auto",
-          }}
-        >
-          <div
-            ref={(el) => {
-              if (el) titleRefs.current[index] = el;
-            }}
-            className="text-4xl lg:text-5xl font-light"
-            style={{
-              position: "relative",
-              zIndex: servicesData.length - index,
-            }}
-          >
-            {service.title}
-          </div>
-          <div
-            ref={(el) => {
-              if (el) contentRefs.current[index] = el;
-            }}
-            className="mt-6"
-          >
-            <p className="text-xl leading-relaxed tracking-widest lg:text-2xl text-white/60">
-              {service.description}
-            </p>
-            <div className="flex flex-col gap-2 text-2xl sm:gap-4 lg:text-3xl text-white/80 mt-4">
-              {service.items.map((item, itemIndex) => (
-                <div key={`item-${index}-${itemIndex}`}>
-                  <h3 className="flex">
-                    <span className="mr-12 text-lg text-white/30">
-                      0{itemIndex + 1}
-                    </span>
-                    {item.title}
-                  </h3>
-                  {itemIndex < service.items.length - 1 && (
-                    <div className="w-full h-px my-2 bg-white/30" />
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      ))}
+      <div className=" relative z-10 lg:px-8">
+        {servicesData.map((service, index) => (
+          <ServiceTile
+            key={index}
+            service={service}
+            index={index}
+            tileRefs={tileRefs}
+            isDesktop={isDesktop}
+            expandedIndex={expandedIndex}
+            setExpandedIndex={setExpandedIndex}
+          />
+        ))}
+      </div>
     </section>
   );
 };

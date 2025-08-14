@@ -1,20 +1,13 @@
-// src/App.jsx (or App.js) - Updated to pass progress state to Preloader
 import { useState, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 
-import About from "./sections/About";
 import Contact from "./sections/Contact";
 import Hero from "./sections/Hero";
 import Projects from "./sections/Projects";
 import TechStack from "./sections/TechStack";
 import Preloader from "./components/Preloader";
-import ServiceSummary from "./sections/Summary";
-import Works from "./sections/Works";
-// import SwimmingGame from "./sections/Game";
-import SwimGame from "./sections/Game";
-import SwimmingGame3D from "./sections/Game";
+
 import Services from "./sections/Services";
-// import Preloader from "./Preloader";
 
 function App() {
   const [isLoaded, setIsLoaded] = useState(false);

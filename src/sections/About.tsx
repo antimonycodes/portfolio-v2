@@ -1,5 +1,4 @@
-import { useRef, useEffect } from "react";
-import GradientSpheres from "../components/GradientDpheres";
+import { useRef } from "react";
 import TitleHeader from "../components/TitleHeader";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
@@ -8,7 +7,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const About = () => {
-  const linesRef = useRef([]);
+  const linesRef = useRef<HTMLElement[]>([]);
 
   useGSAP(() => {
     gsap.from(linesRef.current, {
@@ -24,7 +23,7 @@ const About = () => {
     });
   }, []);
 
-  const addToRefs = (el) => {
+  const addToRefs = (el: HTMLElement | null) => {
     if (el && !linesRef.current.includes(el)) {
       linesRef.current.push(el);
     }
