@@ -101,25 +101,7 @@ section {
       rgba(16, 11, 51, 0) 100%
     );
   }
-  .gradient-sphere {
-    position: absolute;
-    width: 700px;
-    height: 700px;
-    border-radius: 50%;
-    filter: blur(200px);
-  }
-  .sphere-1 {
-    background: radial-gradient(circle, #ff28d5, #ff28d5);
-    top: -100px;
-    left: 300px;
-    animation: wander-left 10s ease-in-out infinite;
-  }
-  .sphere-2 {
-    background: radial-gradient(circle, #1c34ff, #1c34ff);
-    top: 100px;
-    right: 300px;
-    animation: wander-right 12s ease-in-out infinite;
-  }
+
   /* tech stack */
   .about-gradient-sphere {
     position: absolute;

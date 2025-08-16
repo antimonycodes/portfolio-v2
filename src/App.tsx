@@ -8,6 +8,7 @@ import TechStack from "./sections/TechStack";
 import Preloader from "./components/Preloader";
 
 import Services from "./sections/Services";
+import InkBoard from "./sections/Notes";
 
 function App() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -45,6 +46,7 @@ function App() {
           <TechStack />
           <Projects />
           <Contact />
+          {/* <InkBoard /> */}
         </>
       )}
     </div>
