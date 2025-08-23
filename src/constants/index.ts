@@ -104,10 +104,11 @@ export const projects = [
     image: sms,
     bgImage: sms,
     frameworks: [
-      { id: 1, name: "Angular" },
-      { id: 2, name: "Firebase" },
-      { id: 3, name: "GraphQL" },
-      { id: 4, name: "Material UI" },
+      { id: 1, name: "ExpressJs" },
+      { id: 2, name: "React" },
+      { id: 3, name: "Socket.io" },
+      { id: 4, name: "PostgreSql" },
+      { id: 5, name: "Typescript" },
     ],
   },
   {
