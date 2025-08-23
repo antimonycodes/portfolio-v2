@@ -159,7 +159,7 @@ const InkBoard = () => {
     const lineHeight = size * 1.4;
     const maxWidth = 500;
 
-    words.forEach((word, index) => {
+    words.forEach((word) => {
       const wordWidth = ctx.measureText(word + " ").width;
 
       if (currentX + wordWidth > maxWidth && currentX > x) {
