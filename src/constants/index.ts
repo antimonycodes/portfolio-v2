@@ -46,11 +46,11 @@ export const projects = [
   },
   {
     id: 2,
-    name: "Creator Toolz",
+    name: "AI Toolz",
     description:
       "An ai powered toolz for creators, with advanced features for content  and image generation.",
-    href: "https://github.com/antimonycodes/multi-toolz",
-    link: "",
+    href: "https://github.com/antimonycodes/Toolz",
+    link: "https://toolz-sepia.vercel.app/",
     image: toolz,
     bgImage: toolz,
     frameworks: [
