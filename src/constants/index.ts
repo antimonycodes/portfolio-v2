@@ -90,7 +90,7 @@ export const projects = [
       { id: 1, name: "React" },
       { id: 2, name: "Framer Motion" },
       { id: 3, name: "Gsap" },
-      { id: 4, name: "" },
+      { id: 4, name: "Axios" },
       { id: 5, name: "Tailwind CSS" },
     ],
   },
@@ -122,8 +122,8 @@ export const projects = [
     frameworks: [
       { id: 1, name: "Bash" },
       { id: 2, name: "Npm" },
-      { id: 3, name: "" },
-      { id: 4, name: "" },
+      // { id: 3, name: "" },
+      // { id: 4, name: "" },
     ],
   },
 ];
@@ -137,4 +137,4 @@ export const socials = [
   { name: "GitHub", href: "https://github.com/Ali-Sanati" },
 ];
 
-export { navItems };
+export { navItem
