@@ -152,7 +152,7 @@ const Works = () => {
                   </p>
                   <div className="flex gap-4">
                     <a
-                      // href={project.github}
+                      href={project.href}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center gap-2 text-[#B0B0B0] hover:text-[#D1FE17] transition-colors duration-300 hover:scale-105"

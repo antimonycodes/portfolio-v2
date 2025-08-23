@@ -1,4 +1,9 @@
 import learnishDashboard from "../assets/learnish.png";
+import reactScafford from "../assets/bee-scafforrdpng.png";
+import toolz from "../assets/Screenshot_23-8-2025_101947_localhost.jpeg";
+import moviebox from "../assets/Screenshot_23-8-2025_102349_moviebox-pi.vercel.app.jpeg";
+import flycoin from "../assets/Screenshot_23-8-2025_102655_flycoin.vercel.app.jpeg";
+import sms from "../assets/image.png";
 const navItems = [
   {
     name: "Home",
@@ -26,47 +31,48 @@ export const projects = [
   {
     id: 1,
     name: "Learnish",
-    description:
-      "An online store specializing in phone accessories including cases, chargers, cables, and power banks with MagSafe compatibility.",
+    description: "An ai powered learning platform",
     link: "https://learnish-ai.vercel.app/",
+    href: "https://github.com/antimonycodes/Learnish",
     image: learnishDashboard,
     bgImage: learnishDashboard,
     frameworks: [
-      { id: 1, name: "React" },
+      { id: 1, name: "Cloudinary" },
       { id: 2, name: "Next.js" },
       { id: 3, name: "Neon" },
-      { id: 4, name: "LLM" },
-      { id: 5, name: "Tailwind CSS" },
+      { id: 4, name: "Gemini Api" },
+      { id: 5, name: "Youtube Api" },
     ],
   },
   {
     id: 2,
     name: "Creator Toolz",
     description:
-      "An online store specializing in rare and decorative plants with a clean, user-friendly interface.",
-    href: "",
-    image: learnishDashboard,
-    bgImage: learnishDashboard,
+      "An ai powered toolz for creators, with advanced features for content  and image generation.",
+    href: "https://github.com/antimonycodes/multi-toolz",
+    link: "",
+    image: toolz,
+    bgImage: toolz,
     frameworks: [
       { id: 1, name: "React" },
       { id: 2, name: "NodeJs" },
       { id: 3, name: "Neon" },
-      { id: 4, name: "LLM" },
-      { id: 5, name: "Tailwind CSS" },
+      { id: 4, name: "Gemini Api" },
+      { id: 5, name: "Cloudinary" },
     ],
   },
   {
     id: 3,
     name: "Moviebox",
-    description:
-      "An e-commerce platform for Apple products and accessories with deals and category filtering.",
-    href: "",
-    image: learnishDashboard,
-    bgImage: learnishDashboard,
+    description: " A movie discovery platform using TMDB API.",
+    href: "https://github.com/antimonycodes/moviebox",
+    link: "https://moviebox-pi.vercel.app",
+    image: moviebox,
+    bgImage: moviebox,
     frameworks: [
       { id: 1, name: "React" },
-      { id: 2, name: "TMBD Api" },
-      { id: 3, name: "Neon" },
+      { id: 2, name: "TMDB Api" },
+      { id: 3, name: "Framer motion" },
       { id: 4, name: "LLM" },
       { id: 5, name: "Tailwind CSS" },
     ],
@@ -75,10 +81,11 @@ export const projects = [
     id: 4,
     name: "Fly Coin",
     description:
-      "A multi-category online shop featuring electronics, home appliances, and gaming gear with special offers.",
-    href: "",
-    image: learnishDashboard,
-    bgImage: learnishDashboard,
+      "A landingpage for a web3 project showcasing its features and benefits.",
+    href: "https://github.com/antimonycodes/Flycoin",
+    link: "https://flycoin.vercel.app/",
+    image: flycoin,
+    bgImage: flycoin,
     frameworks: [
       { id: 1, name: "React" },
       { id: 2, name: "Framer Motion" },
@@ -89,12 +96,13 @@ export const projects = [
   },
   {
     id: 5,
-    name: "Unab Energy",
+    name: "School Management System",
     description:
-      "A curated collection of designer home decor items, including furniture and artisan vases.",
+      "A comprehensive platform for managing school operations, including student enrollment, attendance tracking, and grade management.",
     href: "",
-    image: learnishDashboard,
-    bgImage: learnishDashboard,
+    link: "",
+    image: sms,
+    bgImage: sms,
     frameworks: [
       { id: 1, name: "Angular" },
       { id: 2, name: "Firebase" },
@@ -104,17 +112,17 @@ export const projects = [
   },
   {
     id: 6,
-    name: "Digital Game Store",
+    name: "Bee React Scafford",
     description:
-      "A gaming platform featuring discounted titles, top sellers, and genre-based browsing.",
-    href: "",
-    image: learnishDashboard,
-    bgImage: learnishDashboard,
+      "An npm package to install react and other important development packages at a go.",
+    href: "https://github.com/antimonycodes/bee-react-scaffold",
+    image: reactScafford,
+    bgImage: reactScafford,
     frameworks: [
-      { id: 1, name: "Svelte" },
-      { id: 2, name: "Node.js" },
-      { id: 3, name: "MongoDB" },
-      { id: 4, name: "Chakra UI" },
+      { id: 1, name: "Bash" },
+      { id: 2, name: "Npm" },
+      { id: 3, name: "" },
+      { id: 4, name: "" },
     ],
   },
 ];
