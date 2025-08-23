@@ -137,4 +137,4 @@ export const socials = [
   { name: "GitHub", href: "https://github.com/Ali-Sanati" },
 ];
 
-export { navItem
+export { navItems };
